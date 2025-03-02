@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "type": "module",
   "types": "dist/index.d.ts",
+  "main": "dist/quackbox-design-system.umd.js",
   "exports": {
     ".": {
       "import": "./dist/quackbox-design-system.es.js",
