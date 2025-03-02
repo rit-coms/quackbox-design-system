@@ -1,11 +1,12 @@
 {
   "name": "quackbox-design-system",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/quackbox-design-system.umd.js",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/quackbox-design-system.es.js",
       "require": "./dist/quackbox-design-system.umd.js"
     }
