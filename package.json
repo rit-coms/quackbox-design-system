@@ -1,18 +1,20 @@
 {
   "name": "quackbox-design-system",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/quackbox-design-system.umd.js",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
+      "css": "./dist/quackbox-design-system.css",
       "import": "./dist/quackbox-design-system.es.js",
       "require": "./dist/quackbox-design-system.umd.js"
     }
   },
   "files": [
     "dist",
+    "dist/quackbox-design-system.css",
     "index.d.ts",
     "src/styles/globals.css"
   ],
