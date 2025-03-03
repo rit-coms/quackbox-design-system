@@ -2,7 +2,6 @@ import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
 import dts from "vite-plugin-dts"
 import { dependencies as peerDependencies } from "./package.json"
-import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js"
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -13,8 +12,7 @@ export default defineConfig({
       outDir: "dist",
       tsconfigPath: "./tsconfig.app.json",
       insertTypesEntry: true
-    }),
-    cssInjectedByJsPlugin()
+    })
   ],
   build: {
     lib: {
@@ -26,10 +24,10 @@ export default defineConfig({
     rollupOptions: {
       external: Object.keys(peerDependencies),
       output: { 
-        globals: { react: "React", "react-dom": "ReactDOM" },
-        assetFileNames: 'quackbox-design-system.css' 
+        globals: { react: "React", "react-dom": "ReactDOM" }
       },   
-    }
+    },
+    cssCodeSplit: false
   },
   css: {
     modules: {
