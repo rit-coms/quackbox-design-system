@@ -1,4 +1,7 @@
 
+import "./styles/globals.css"
+import "./components/Button/Button.module.css"
+
 export { ActionButton } from "./components/Action Button/ActionButton"
 export { Alert } from "./components/Alert/Alert"
 export { ButtonGroup } from "./components/Button Group/ButtonGroup"
