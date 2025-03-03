@@ -24,10 +24,10 @@ export default defineConfig({
     rollupOptions: {
       external: Object.keys(peerDependencies),
       output: { 
-        globals: { react: "React", "react-dom": "ReactDOM" }
-      },   
-    },
-    cssCodeSplit: false
+        globals: { react: "React", "react-dom": "ReactDOM" },
+        assetFileNames: "assets/[name][extname]"
+      } 
+    }
   },
   css: {
     modules: {
