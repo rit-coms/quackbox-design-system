@@ -3,7 +3,7 @@ import { CSSProperties, ReactNode } from "react"
 import { BaseProps } from "../../types"
 import styles from "./ButtonGroup.module.css"
 
-interface ButtonGroupProps extends BaseProps {
+export interface ButtonGroupProps extends BaseProps {
     
     // Content Props
     children: ReactNode
@@ -40,9 +40,10 @@ export const ButtonGroup = ({
     // Base Props
     className,
     id,
+    dataId,
     ...props
 
-}: ButtonGroupProps) => {
+}: ButtonGroupProps): ReactNode => {
 
     const classNames: string = [
         styles.buttonGroup,
@@ -62,6 +63,7 @@ export const ButtonGroup = ({
     return (
         <div 
             className={classNames}
+            data-id={dataId && dataId}
             style={{gap: gap}}
             {...props}
         >

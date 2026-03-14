@@ -1,16 +1,16 @@
 
-import { useState } from "react"
+import { ReactNode, useState } from "react"
 import { BaseProps } from "../../types"
 import styles from "./CheckboxGroup.module.css"
 
-interface CheckboxOption {
+export interface CheckboxOption {
 
     // Content Props
     label: string
 
 }
 
-interface CheckboxGroupProps extends BaseProps {
+export interface CheckboxGroupProps extends BaseProps {
     // Content Props
     options: CheckboxOption[]
 
@@ -32,16 +32,17 @@ export const CheckboxGroup = ({
     // Base Props
     className,
     id,
+    dataId,
     ...props
 
-}: CheckboxGroupProps) => {
+}: CheckboxGroupProps): ReactNode => {
 
     const [internalValues, setInternalValues] = useState<string[]>(selectedValues)
 
     const handleChange = (newSelectedValue: string) => {
         let updatedValues
         if (internalValues?.includes(newSelectedValue)) 
-            updatedValues = internalValues.filter(value => value != newSelectedValue)
+            updatedValues = internalValues.filter(value => value !== newSelectedValue)
         else
             updatedValues = [...internalValues, newSelectedValue]
 
@@ -62,15 +63,18 @@ export const CheckboxGroup = ({
     return (
         <div 
             className={classNames}
+            data-id={dataId && dataId}
             {...props}
         >
             {options.map((option) => (
                 <label 
                     className={styles.checkboxLabel}
+                    data-id={dataId && `${dataId}-label`}
                     key={option.label}
                 >
                     <input
                         className={styles.checkbox}
+                        data-id={dataId && `${dataId}-checkbox`}
                         checked={internalValues.includes(option.label)}
                         disabled={disabled}
                         onChange={() => handleChange(option.label)}

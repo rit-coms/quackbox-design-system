@@ -1,9 +1,10 @@
 
+import { ReactNode } from "react"
 import { Positions } from "../../types"
 import { IconButton, IconButtonProps } from "../Icon Button/IconButton"
 import styles from "./CloseButton.module.css"
 
-interface CloseButtonProps extends Omit<IconButtonProps, "iconName"> {
+export interface CloseButtonProps extends Omit<IconButtonProps, "iconName"> {
 
     // Styling Props
     position?: Positions
@@ -21,9 +22,10 @@ export const CloseButton = ({
     // Base Props
     className,
     id,
+    dataId,
     ...props
 
-}: CloseButtonProps) => {
+}: CloseButtonProps): ReactNode => {
 
     const classNames: string = [
         styles.button,
@@ -41,6 +43,7 @@ export const CloseButton = ({
     return (
         <IconButton
             className={classNames}
+            dataId={dataId && dataId}
             iconName={"LuX"}
             onClick={onClick}
             variant={variant}

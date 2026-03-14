@@ -41,10 +41,13 @@ export const ModalVariants_GameInfo: Story = {
     name: "Game Info",
     render: () => (
         <Modal
-            title={"Game Info"}
+            title={"Game Title"}
             isOpen={true}
             variant={"gameInfo"}
+            gameImageSrc={"/assets/coming_soon.png"}
             onClose={() => {}}
+            confirmLabel={"Play"}
+            confirmLabelColorPrimary
         >
             Game Info children
         </Modal>

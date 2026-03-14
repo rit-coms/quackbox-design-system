@@ -3,7 +3,7 @@ import { ElementType, ReactNode } from "react"
 import { BaseProps, FontSizes, Weights } from "../../../types"
 import styles from "../Typography.module.css"
 
-interface HeaderProps extends BaseProps {
+export interface HeaderProps extends BaseProps {
 
     // Content Props
     children: ReactNode
@@ -18,15 +18,16 @@ interface HeaderProps extends BaseProps {
 export const Header = ({
     children,
     level = 2,
-    fontSize = "default",
+    fontSize = "auto",
     weight = "normal",
 
     // Base Props
     className,
     id,
+    dataId,
     ...props
 
-}: HeaderProps) => {
+}: HeaderProps): ReactNode => {
 
     const classNames = [
         styles.header,
@@ -42,6 +43,7 @@ export const Header = ({
     return (
         <Tag 
             className={classNames}
+            data-id={dataId && dataId}
             {...props}
         >
             {children}

@@ -1,10 +1,10 @@
 
-import { useEffect, useState } from "react"
+import { ReactNode, useEffect, useState } from "react"
 import { AlertVariants, BaseProps } from "../../types"
 import { CloseButton } from "../Close Button/CloseButton"
 import styles from "./Alert.module.css"
 
-interface AlertProps extends BaseProps {
+export interface AlertProps extends BaseProps {
 
     // Content Props
     message: string
@@ -27,9 +27,10 @@ export const Alert = ({
     // Base Props
     className,
     id,
+    dataId,
     ...props
 
-}: AlertProps) => {
+}: AlertProps): ReactNode => {
 
     const [isVisible, setIsVisible] = useState<boolean>(true)
 
@@ -46,8 +47,6 @@ export const Alert = ({
         return () => clearTimeout(timer)
     }, [duration, onClose])
 
-    
-
     const classNames: string = [
         styles.alert, 
         styles[variant],
@@ -59,17 +58,21 @@ export const Alert = ({
     return (
         isVisible && 
             <div 
-                className={classNames} 
+                className={classNames}
+                data-id={dataId && dataId} 
                 {...props}
             >
                 <div className={styles.alertContent}>
                     
-                    <span className={styles.alertMessage}>
+                    <span 
+                        className={styles.alertMessage}
+                        data-id={dataId && `${dataId}-message`}>
                         {message}
                     </span> 
                    
                     <CloseButton 
                         className={styles.alertClose}
+                        dataId={dataId && `${dataId}-close-button`}
                         onClick={onClose || handleOnClose}
                         height={"small"} 
                     />

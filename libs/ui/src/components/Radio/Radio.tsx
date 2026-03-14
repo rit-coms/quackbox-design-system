@@ -1,8 +1,9 @@
 
+import { ReactNode } from "react"
 import { BaseProps } from "../../types"
 import styles from "./Radio.module.css"
 
-interface RadioProps extends BaseProps {
+export interface RadioProps extends BaseProps {
 
     // Content Props
     children: string
@@ -26,9 +27,10 @@ export const Radio = ({
     // Base Props
     className,
     id,
+    dataId,
     ...props 
 
-}: RadioProps) => {
+}: RadioProps): ReactNode => {
 
     const classNames: string = [
         styles.radioContainer,
@@ -41,12 +43,17 @@ export const Radio = ({
     return (
         <div 
             className={classNames}
+            data-id={dataId && dataId}
             {...props}
         >
-            <label className={styles.radioLabel}>
+            <label 
+                className={styles.radioLabel}
+                data-id={dataId && `${dataId}-label`}
+            >
 
                 <input
                     className={styles.radioInput}
+                    data-id={dataId && `${dataId}-radio`}
                     checked={selected}
                     disabled={disabled}
                     onChange={(e) => onChange(e.target.value)}

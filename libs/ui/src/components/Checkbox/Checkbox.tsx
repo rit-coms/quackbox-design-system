@@ -1,8 +1,9 @@
 
+import { ReactNode } from "react"
 import { BaseProps } from "../../types"
 import styles from "./Checkbox.module.css"
 
-interface CheckboxProps extends BaseProps {
+export interface CheckboxProps extends BaseProps {
 
     // Content Props
     children: string
@@ -25,9 +26,10 @@ export const Checkbox = ({
     // Base Props
     className,
     id,
+    dataId,
     ...props
 
-}: CheckboxProps) => {
+}: CheckboxProps): ReactNode => {
 
     const classNames: string = [
         styles.checkboxContainer,
@@ -40,12 +42,17 @@ export const Checkbox = ({
     return (
         <div 
             className={classNames} 
+            data-id={dataId && dataId}
             {...props}
         >
-             <label className={styles.checkboxLabel}>
+             <label 
+                className={styles.checkboxLabel}
+                data-id={dataId && `${dataId}-label`}
+            >
                 
                 <input
                     className={styles.checkbox}
+                    data-id={dataId && `${dataId}-checkbox`}
                     checked={checked}
                     disabled={disabled}
                     onChange={(e) => onChange(e.target.checked)}

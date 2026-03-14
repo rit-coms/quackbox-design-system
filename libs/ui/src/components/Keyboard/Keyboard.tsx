@@ -1,10 +1,11 @@
 
+import { ReactNode } from "react"
 import { BaseProps } from "../../types"
 import { Button } from "../Button/Button"
 import { Icon } from "../Icon/Icon"
 import styles from "./Keyboard.module.css"
 
-interface KeyboardProps extends BaseProps {
+export interface KeyboardProps extends BaseProps {
 
     // Content Props
     layout?: "qwerty" | "alpha"
@@ -21,9 +22,10 @@ export const Keyboard = ({
     // Base Props
     className,
     id,
+    dataId,
     ...props
 
-}: KeyboardProps) => {
+}: KeyboardProps): ReactNode => {
 
     const getKeys = () => {
         switch (layout) {
@@ -61,6 +63,7 @@ export const Keyboard = ({
     return (
         <div
             className={classNames}
+            data-id={dataId && dataId}
             {...props}
         >
             {getKeys().map((keyboardRow, index) => {
@@ -69,22 +72,24 @@ export const Keyboard = ({
                     <div 
                         key={index}
                         className={styles.keyboardRow}
+                        data-id={dataId && `${dataId}-row-${index}`}
                     >
                         {keyboardRow.map((key, index) => {
 
                             let classNames: string = styles.keyboardKey
 
-                            if (key == "space") classNames += " " + styles.span3
-                            if (key == "clear") classNames += " " + styles.span2
+                            if (key === "space") classNames = `${classNames} ${styles.span3}`
+                            if (key === "clear") classNames = `${classNames} ${styles.span2}`
                             
                             return (
                                 <Button
                                     key={index}
                                     className={classNames}
+                                    dataId={dataId && `${dataId}-key-${key}`}
                                     onClick={() => onKeyPress(key)}
                                 >
                                     {
-                                        key != "delete" 
+                                        key !== "delete" 
                                         ? key : 
                                         <Icon 
                                             className={styles.icon}

@@ -1,10 +1,11 @@
 
+import { ReactNode } from "react"
 import { BaseProps } from "../../types"
 import { Button } from "../Button/Button"
 import { Text } from "../Typography/Text/Text"
 import styles from "./PlayerTile.module.css"
 
-interface PlayerTileProps extends BaseProps {
+export interface PlayerTileProps extends BaseProps {
 
     // Content Props
     playerNumber: number
@@ -27,12 +28,14 @@ export const PlayerTile = ({
     // Base Props
     className,
     id,
+    dataId,
     ...props
 
-}: PlayerTileProps) => {
+}: PlayerTileProps): ReactNode => {
 
     const classNames: string = [
         styles.playerTile,
+        isConnected && styles.connected,
 
         className,
         id
@@ -41,9 +44,13 @@ export const PlayerTile = ({
     return (
         <figure
             className={classNames}
+            data-id={dataId && dataId}
             {...props}
         >
-            <div className={styles.playerIcon}>
+            <div 
+                className={styles.playerIcon}
+                data-id={dataId && `${dataId}-icon`}
+            >
                 {isConnected &&
                     <img
                         className={styles.playerImg}
@@ -54,12 +61,15 @@ export const PlayerTile = ({
             
             <figcaption>
                 <Button
+                    dataId={dataId && `${dataId}-label`}
                     height={"medium"}
                     onClick={onToggle && onToggle}
                     variant={isConnected ? "primary" : "secondary"}
                     width={"stretch"}
                 >
-                    <Text>Player {playerNumber}</Text>
+                    <Text dataId={dataId && `${dataId}-player-number`}>
+                        Player {playerNumber}
+                    </Text>
                 </Button>
             </figcaption>
 

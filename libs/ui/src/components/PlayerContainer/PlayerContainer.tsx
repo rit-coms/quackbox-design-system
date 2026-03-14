@@ -18,9 +18,10 @@ export const PlayerContainer = ({
     // Base Props
     className,
     id,
+    dataId,
     ...props
 
-}: PlayerContainerProps) => {
+}: PlayerContainerProps): ReactNode => {
 
     const gridMode: boolean = numPlayers > 4
 
@@ -35,6 +36,7 @@ export const PlayerContainer = ({
     return (
         <div
             className={classNames}
+            data-id={dataId && dataId}
             style={{ "--num-players": Math.min(numPlayers, 4)} as CSSProperties}
             {...props}
         >

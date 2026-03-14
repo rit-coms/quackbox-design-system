@@ -2,10 +2,11 @@
 import * as LuIcons from "react-icons/lu"
 import { BaseProps, ColorVariants } from "../../types"
 import styles from "./Icon.module.css"
+import { ReactNode } from "react"
 
-type IconName = keyof typeof LuIcons
+export type IconName = keyof typeof LuIcons
 
-interface IconProps extends BaseProps {
+export interface IconProps extends BaseProps {
 
     // Content Props
     iconName: IconName
@@ -22,9 +23,10 @@ export const Icon = ({
     // Base Props
     className,
     id,
+    dataId,
     ...props
 
-}: IconProps) => {
+}: IconProps): ReactNode => {
 
     const Icon = LuIcons[iconName]
 
@@ -39,6 +41,7 @@ export const Icon = ({
     return (
         <div 
             className={classNames}
+            data-id={dataId && dataId}
             {...props}
         >
             <Icon />

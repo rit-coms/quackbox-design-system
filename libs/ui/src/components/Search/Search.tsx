@@ -1,8 +1,9 @@
 
+import { ReactNode } from "react"
 import { BaseProps } from "../../types"
 import styles from "./Search.module.css"
 
-interface SearchProps extends BaseProps {
+export interface SearchProps extends BaseProps {
 
     // Action Props
     onChange: () => void
@@ -27,9 +28,10 @@ export const Search = ({
     // Base Props
     className,
     id,
+    dataId,
     ...props
 
-}: SearchProps) => {
+}: SearchProps): ReactNode => {
 
     const classNames: string = [
         styles.search,
@@ -41,6 +43,7 @@ export const Search = ({
     return (
         <input
             className={classNames}
+            data-id={dataId && dataId}
             autoComplete={"off"}
             disabled={disabled}
             maxLength={maxLength}

@@ -1,13 +1,24 @@
 
+import { ReactNode } from "react"
 import { BaseProps, FontSizes } from "../../types"
 import { Header } from "../Typography/Header/Header"
 import styles from "./Game.module.css"
 
-interface GameProps extends BaseProps {
+export interface GameProps extends BaseProps {
 
     // Content Props
+    gameId: string
     title: string
-    imageUrl?: string
+    filePath?: string
+    author: string
+    summary?: string
+    releaseDate?: string
+    multiplayer?: boolean
+    genres?: string[]
+    coverImage?: string
+    timesPlayed?: number
+    lastPlayed?: string
+    exec?: string
 
     // Action Props
     onClick?: () => void
@@ -19,8 +30,18 @@ interface GameProps extends BaseProps {
 }
 
 export const Game = ({
+    gameId,
     title,
-    imageUrl,
+    filePath,
+    author,
+    summary,
+    releaseDate,
+    multiplayer,
+    genres,
+    coverImage,
+    timesPlayed,
+    lastPlayed,
+    exec,
     onClick,
     fontSize = "xlarge",
     placeholder,
@@ -28,9 +49,10 @@ export const Game = ({
     // Base Props
     className,
     id,
+    dataId,
     ...props
 
-}: GameProps) => {
+}: GameProps): ReactNode => {
 
     const classNames: string = [
         styles.game,
@@ -41,24 +63,32 @@ export const Game = ({
     ].filter(Boolean).join(" ")
 
     return (
-        <div
-            className={classNames}
-            style={{backgroundImage: `url(${imageUrl})`}}
-            onClick={onClick}
-            tabIndex={0}
-            {...props}
+        <div 
+            className={styles.gameContainer} 
+            tabIndex={0} 
+            data-id={dataId && `${dataId}-container`}
+            role={"button"}
         >
-            {!imageUrl &&
-                <div className={styles.name}>
-                    <Header
-                        level={1}
-                        fontSize={fontSize}
-                    >
-                        {title}
-                    </Header>
-                </div>
-            }
-            
+            <div
+                className={classNames}
+                style={{ backgroundImage: !coverImage?.includes("null") && `url(${coverImage})` || "" }}
+                onClick={onClick}
+                data-id={dataId && `${dataId}-${gameId}`}
+                {...props}
+            >
+                {!coverImage &&
+                    <div className={styles.name}>
+                        <Header
+                            dataId={dataId && `${dataId}-title`}
+                            level={1}
+                            fontSize={fontSize}
+                        >
+                            {title}
+                        </Header>
+                    </div>
+                }
+                
+            </div>
         </div>
     )
     
